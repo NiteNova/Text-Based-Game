@@ -2,8 +2,16 @@ import random #a module (file of prewritten code)
 
 
 
-game_over = False
+#Start for the user
+game_over = True
+start = input("Do you want to play Total Apocalypse? (Y/N): "
+    if start == 'Y' or start == 'y':
+              game_over = False
+    else:
+         print("Goodbye")
+
 room = 1
+
 
 #variables, lists, etc for player
 inventory = []
