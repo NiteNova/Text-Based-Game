@@ -90,7 +90,7 @@ def BattleSystem(monsterType, playerHealth):
     
     
     #Makes sure the health doesn't reset to 100 every time you do combat
-    return playerHealth
+    return playerHealth 
 
 
 #---------------End of Battle system Function---------------
@@ -138,6 +138,7 @@ def monster(biome):
         else: #10 percent chance
             print("Acid slime creature is oozing from the walls behind you")
             BattleSystem("Slime", health)
+        
 #----------------End of monster appearance function-----------
 
 #local game variables
@@ -190,7 +191,8 @@ while game_over is not True:
         if room2Mon == False:
             monster("Hallway") #function call
             room2Mon = True
-        print("You see a magical health potion on the floor.")
+        if healthpot1 == False:
+            print("You see a magical health potion on the floor.")
         print("You are in the hallway, you can go (w)est to go back to your room or (s)outh ")
         choice = input()
         if choice == 's' or choice == 'S' or choice == 'South':
@@ -229,7 +231,7 @@ while game_over is not True:
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 3
-        elif choice == 'e':
+        elif choice == 'e' or choice == 'e' or choice == 'East':
             room = 5
         else:
             print("Sorry that isn't a direction you can go.")
@@ -239,11 +241,10 @@ while game_over is not True:
         print()
         print("You're at the bottom of the stairway and the door to leave is to your right")
         print("A magical health potion rolls around the corner from the shoe rack")
-        monster("") #function call
         choice = input()
-        if choice == '' or choice == '' or choice == '':
+        if choice == 'w' or choice == 'W' or choice == 'West':
             room = 4
-        elif choice == '':
+        elif choice == 's' or choice == 's' or choice == 'sOuth':
             room = 6
         else:
             print("Sorry that isn't a direction you can go.")
@@ -252,11 +253,20 @@ while game_over is not True:
     if room == 6:
         print()
         print("You're outside, you can go (w)est, (n)orth, (e)ast, (s)outh")
-        monster("") #function call
+
         choice = input()
-        if choice == '' or choice == '' or choice == '':
+        if choice == 'n' or choice == 'N' or choice == 'North':
             room = 5
-        elif choice == '':
+            
+        elif choice == 'w' or choice == 'W' or choice == 'West':
+            print("Game over! You died by: ")
+            game_over = True
+        elif choice == 'e' or choice == 'E' or choice == 'West':
+            print("Game over! You died by: ")
+            game_over = True
+            
+        #The room you're supposed to go into
+        elif choice == 's' or choice == 'S' or choice == 'South':
             room = 7
         else:
             print("Sorry that isn't a direction you can go.")
@@ -264,48 +274,151 @@ while game_over is not True:
     #In the forest with the neighborhood behind
     if room == 7:
         print()
-        print("You're in a forest, you can go (w)est, (n)orth, (e)ast, (s)outh")
-        monster("") #function call
+        print("You're in a very overgrown forest, you can go (w)est, (n)orth, (e)ast, (s)outh")
+
         choice = input()
-        if choice == '' or choice == '' or choice == '':
+        if choice == 'n' or choice == 'N' or choice == 'North':
             room = 6
-        elif choice == '':
+        elif choice == 's' or choice == 'S' or choice == 'South':
             room = 8
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            room = "W1"
+        elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = "E1"
         else:
             print("Sorry that isn't a direction you can go.")
 
     if room == 8:
         print()
-        print("You're near the end of the forest and see a light in the distance, you can go (w)est, (n)orth, (e)ast, (s)outh")
-        monster("") #function call
+        print("You find yourself in the middle of the forest with the least amount of trees, you can go (w)est, (n)orth, (e)ast, (s)outh")
+
         choice = input()
-        if choice == '' or choice == '' or choice == '':
+        if choice == 'n' or choice == 'N' or choice == 'North':
             room = 7
-        elif choice == '':
+        elif choice == 's' or choice == 'S' or choice == 'South':
             room = 9
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            room = "W2"
+        elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = "E2"
         else:
             print("Sorry that isn't a direction you can go.")
         
     if room == 9:
         print()
-        print("")
-        monster("") #function call
+        print("Room 9")
+
         choice = input()
-        if choice == '' or choice == '' or choice == '':
+        if choice == 'n' or choice == 'N' or choice == 'North':
             room = 8
-        elif choice == '':
+        elif choice == 'e' or choice == 'E' or choice == 'E':
             room = 10
+        elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = "W3"
         else:
             print("Sorry that isn't a direction you can go.")
         
     if room == 10:
         print()
-        print("")
+        print("Room 10")
+
+        choice = input()
+        if choice == 'w' or choice == 'W' or choice == 'West':
+            room = 9
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            room = 11
+        elif choice == 'n' or choice == 'N' or choice == 'North':
+            room = "E2"
+        elif choice == 's'or choice == 'S' or choice == 'South':
+            room = 12
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == 11:
+        print()
+        print("Room 11")
+
+        choice = input()
+        if choice == 'w' or choice == 'W' or choice == 'W':
+            room = 10
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            print("Placeholder: Win")
+            game_over == True
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == 12:
+        print()
+        print("Room 12")
+ 
+        choice = input()
+        if choice == 'n' or choice == 'N' or choice == 'North':
+            room = 10
+        elif choice == '' or choice == '' or choice == '':
+            print("Placeholder: Lose")
+            game_over == True
+        else:
+            print("Sorry that isn't a direction you can go.")
+            
+            
+            
+            
+            
+    #-----------------------The extra rooms in the forest-----------------------
+    if room == "W1":
+        print()
+        print("W1")
         monster("") #function call
         choice = input()
-        if choice == '' or choice == '' or choice == '':
-            room = 9
-        elif choice == '':
+        if choice == 'e' or choice == 'E' or choice == 'East':
+            room = 7
+        elif choice == 's' or choice == 'S' or choice == 'South':
+            room = "W2"
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == "W2":
+        print()
+        print("W2")
+        
+        choice = input()
+        if choice == 'n' or choice == 'N' or choice == 'North':
+            room = "W1"
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            room = 8
+        elif choice == 's' or choice == 'S' or choice == 'south':
+            room = "W3"
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == "W3":
+        print()
+        print("W3")
+        
+        choice = input()
+        if choice == 'n' or choice == 'N' or choice == 'North':
+            room = "W2"
+        elif choice == 'e' or choice == 'E' or choice == 'East':
+            room = "9"
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == "E1":
+        print()
+        print("E1")
+        
+        choice = input()
+        if choice == 'w' or choice == 'W' or choice == 'West':
+            room = 7
+        elif choice == 's' or choice == 'S' or choice == 'South':
+            room = "E2"
+        else:
+            print("Sorry that isn't a direction you can go.")
+    if room == "E2":
+        print()
+        print("E2")
+        
+        choice = input()
+        if choice == 'n' or choice == 'N' or choice == 'North':
+            room = "E1"
+        elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = 8
+        elif choice == 's' or choice == 'S' or choice == 'South':
             room = 10
         else:
             print("Sorry that isn't a direction you can go.")
