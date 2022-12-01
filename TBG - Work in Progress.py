@@ -90,7 +90,9 @@ def BattleSystem(monsterType, playerHealth):
     
     
     #Makes sure the health doesn't reset to 100 every time you do combat
-    return playerHealth 
+    global health
+    health = playerHealth
+    return playerHealth
 
 
 #---------------End of Battle system Function---------------
