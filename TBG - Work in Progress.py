@@ -305,21 +305,21 @@ while game_over is not True:
             room = "E2"
         else:
             print("Sorry that isn't a direction you can go.")
-        
+    #Very south of the Forest    
     if room == 9:
         print()
-        print("Room 9")
+        print("The trail ")
 
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 8
-        elif choice == 'e' or choice == 'E' or choice == 'E':
+        elif choice == 'e' or choice == 'e' or choice == 'e':
             room = 10
-        elif choice == 'w' or choice == 'W' or choice == 'West':
+        elif choice == 'w' or choice == 'w' or choice == 'West':
             room = "W3"
         else:
             print("Sorry that isn't a direction you can go.")
-        
+    #Southeast of the Forest    
     if room == 10:
         print()
         print("Room 10")
@@ -335,6 +335,7 @@ while game_over is not True:
             room = 12
         else:
             print("Sorry that isn't a direction you can go.")
+    #The room right before the ending
     if room == 11:
         print()
         print("Room 11")
@@ -344,9 +345,10 @@ while game_over is not True:
             room = 10
         elif choice == 'e' or choice == 'E' or choice == 'East':
             print("Placeholder: Win")
-            game_over == True
+            game_over = True
         else:
             print("Sorry that isn't a direction you can go.")
+    #Room that will fake out player leading them to losing
     if room == 12:
         print()
         print("Room 12")
@@ -356,7 +358,7 @@ while game_over is not True:
             room = 10
         elif choice == '' or choice == '' or choice == '':
             print("Placeholder: Lose")
-            game_over == True
+            game_over = True
         else:
             print("Sorry that isn't a direction you can go.")
             
@@ -365,6 +367,7 @@ while game_over is not True:
             
             
     #-----------------------The extra rooms in the forest-----------------------
+    #Northwest of Forest
     if room == "W1":
         print()
         print("W1")
@@ -376,6 +379,7 @@ while game_over is not True:
             room = "W2"
         else:
             print("Sorry that isn't a direction you can go.")
+    #West of Forest
     if room == "W2":
         print()
         print("W2")
@@ -389,6 +393,7 @@ while game_over is not True:
             room = "W3"
         else:
             print("Sorry that isn't a direction you can go.")
+    #Southwest of Forest
     if room == "W3":
         print()
         print("W3")
@@ -400,6 +405,7 @@ while game_over is not True:
             room = "9"
         else:
             print("Sorry that isn't a direction you can go.")
+    #Northeast of Forest
     if room == "E1":
         print()
         print("E1")
@@ -411,6 +417,7 @@ while game_over is not True:
             room = "E2"
         else:
             print("Sorry that isn't a direction you can go.")
+    #East of Forest
     if room == "E2":
         print()
         print("E2")
