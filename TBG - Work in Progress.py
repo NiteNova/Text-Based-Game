@@ -13,7 +13,9 @@ health = 100
 inventory = []
 
 #--------------Battle system Function-----------------------
-def BattleSystem(monsterType, playerHealth):
+def BattleSystem(monsterType):
+    global health
+
     # All enemy types
     if monsterType == "Zombie":
         monsterHealth = 20
@@ -34,29 +36,32 @@ def BattleSystem(monsterType, playerHealth):
         
         
     #Actually battling 
-    while monsterHealth > 0 and playerHealth > 0:
+    while monsterHealth > 0 and health > 0:
+
+
         if monsterType == "Zombie":
-            monsterAttack = random.randrange(8, 13)
+             monsterAttack = random.randrange(8, 13)
         elif monsterType == "Skeleton":
-            monsterAttack = random.randrange(6, 12)
+             monsterAttack = random.randrange(6, 12)
         elif monsterType == "Ogre":
-            monsterAttack = random.randrange(7, 10)
+             monsterAttack = random.randrange(7, 10)
         elif monsterType == "Rats":
-            monsterAttack = random.randrange(12, 20)
+             monsterAttack = random.randrange(12, 20)
         elif monsterType == "Spider":
-            monsterAttack = random.randrange(10, 16)
+             monsterAttack = random.randrange(10, 16)
         elif monsterType == "Witch":
-            monsterAttack = random.randrange(8, 13)
+             monsterAttack = random.randrange(8, 13)
         elif monsterType == "Slime":
-            monsterAttack = random.randrange(9, 14)
+             monsterAttack = random.randrange(9, 14)
         elif monsterType == "SSpider":
-            monsterAttack = random.randrange(12, 20)
+             monsterAttack = random.randrange(12, 20)
+
         
         
         #Enemy attacks    
         print("The", monsterType, "attacks for", monsterAttack)
-        playerHealth = playerHealth - monsterAttack
-        print("Your health is now", playerHealth)
+        health = health - monsterAttack
+        print("Your health is now", health)
         
         
         
@@ -80,20 +85,14 @@ def BattleSystem(monsterType, playerHealth):
         
         
     #Zero health = Game over
-    if playerHealth == 0:
+    if health <= 0:
         print("You died to a", monsterType)
         global game_over
         game_over = True
         
     elif monsterHealth <= 0:
         print("You killed the", monsterType)
-    print("Your current health is", playerHealth)
-    
-    
-    #Makes sure the health doesn't reset to 100 every time you do combat
-    global health
-    health = playerHealth
-    return playerHealth
+    print("Your current health is", health)
 
 
 #---------------End of Battle system Function---------------
@@ -105,42 +104,42 @@ def monster(biome):
     if biome == "Bedroom":
         if num < 20: # 20% percent chance 
             print("A zombie breaks out of the closet is running to attack you")
-            BattleSystem("Zombie", health)
+            BattleSystem("Zombie")
         elif num < 50: # 30% percent chance
             print("A skeleton crawls under the bed and tries to grab you")
-            BattleSystem("Skeleton", health)
+            BattleSystem("Skeleton")
         elif num < 90: # 40% percent chance
             print("An ogre is slamming on your window and tries to get in")
-            BattleSystem("Ogre", health)
+            BattleSystem("Ogre")
         else: #10 percent chance
             print("You see big zombified rats charge at you from the floorboards")
-            BattleSystem("Rats", health)
+            BattleSystem("Rats")
     elif biome == "Hallway":
         if num < 20: # 20% percent chance 
             print("A zombie is breaking into your window on the left")
-            BattleSystem("Zombie", health)
+            BattleSystem("Zombie")
         elif num < 50: # 30% percent chance
             print("A skeleton is aiming an arrow at you from the attic")
-            BattleSystem("Skeleton", health)
+            BattleSystem("Skeleton")
         elif num < 90: # 40% percent chance
             print("A giant spider appears from the floorboards!")
-            BattleSystem("Spider", health)
+            BattleSystem("Spider")
         else: #10 percent chance
             print("A witch is charging up to throw a potion at you.")
-            BattleSystem("Witch", health)
+            BattleSystem("Witch")
     elif biome == "TopStair":
         if num < 25: # 25% percent chance 
             print("A zombie comes up from the floorboard trying to grab at you")
-            BattleSystem("Zombie", health)
+            BattleSystem("Zombie")
         elif num < 75: # 50% percent chance
             print("A witch comes out the bathroom and is heading towards you direction")
-            BattleSystem("Witch", health)
+            BattleSystem("Witch")
         elif num < 90: # 15% percent chance
             print("Spiders start flooding the hallway!")
-            BattleSystem("SSpider", health)
+            BattleSystem("SSpider")
         else: #10 percent chance
             print("Acid slime creature is oozing from the walls behind you")
-            BattleSystem("Slime", health)
+            BattleSystem("Slime")
         
 #----------------End of monster appearance function-----------
 
@@ -163,7 +162,10 @@ AAbatt = False
 
      
 # Game starts   #   Moving around the map   #   User input that affects the game
-while game_over is not True:
+while True:
+
+    if (game_over):
+        break
 
     #Bedroom
     if room == 1:
@@ -173,6 +175,8 @@ while game_over is not True:
             print("and you see a baseball bat close to the door")
         if room1Mon == False:
             monster("Bedroom") #function call
+            if (game_over):
+                break
             room1Mon = True
         print("A direction you can go is (e)ast")
 
@@ -189,10 +193,12 @@ while game_over is not True:
             print("Sorry, that is not an option.")
             
     #Hallway next to bedroom
-    if room == 2:
+    elif room == 2: 
         print()
         if room2Mon == False:
             monster("Hallway") #function call
+            if (game_over):
+                break
             room2Mon = True
         if healthpot1 == False:
             print("You see a magical health potion on the floor.")
@@ -209,7 +215,8 @@ while game_over is not True:
             print("Sorry, that is not an option.")
     
     #Middle of hallway
-    if room == 3:
+    elif room == 3:
+         
         print()
         print("You are in the middle of the hallway. You can go (n)orth or (s)outh ")
         print("You see double A batteries on the floor.")
@@ -225,11 +232,14 @@ while game_over is not True:
             print("Sorry that isn't a direction you can go.")
             
     #End of hallway        
-    if room == 4:
+    elif room == 4:
+         
         print()
         print("You are at the end of the hallway at the top of the stairway.")
         if room4Mon == False:
             monster("TopStair") #function call
+            if (game_over):
+                break
             room4Mon = True
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -240,7 +250,8 @@ while game_over is not True:
             print("Sorry that isn't a direction you can go.")
     
     #Bottom of stairway
-    if room == 5:
+    elif room == 5:
+         
         print()
         print("You're at the bottom of the stairway and the door to leave is to your right")
         print("A magical health potion rolls around the corner from the shoe rack")
@@ -253,7 +264,8 @@ while game_over is not True:
             print("Sorry that isn't a direction you can go.")
             
     #Outside with house door behind
-    if room == 6:
+    elif room == 6:
+         
         print()
         print("You're outside, you can go (w)est, (n)orth, (e)ast, (s)outh")
 
@@ -275,7 +287,8 @@ while game_over is not True:
             print("Sorry that isn't a direction you can go.")
 
     #In the forest with the neighborhood behind
-    if room == 7:
+    elif room == 7:
+         
         print()
         print("You're in a very overgrown forest, you can go (w)est, (n)orth, (e)ast, (s)outh")
 
@@ -291,7 +304,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
 
-    if room == 8:
+    elif room == 8:
+         
         print()
         print("You find yourself in the middle of the forest with the least amount of trees, you can go (w)est, (n)orth, (e)ast, (s)outh")
 
@@ -307,7 +321,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #Very south of the Forest    
-    if room == 9:
+    elif room == 9:
+         
         print()
         print("The trail ")
 
@@ -321,7 +336,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #Southeast of the Forest    
-    if room == 10:
+    elif room == 10:
+         
         print()
         print("Room 10")
 
@@ -337,7 +353,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #The room right before the ending
-    if room == 11:
+    elif room == 11:
+         
         print()
         print("Room 11")
 
@@ -350,7 +367,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #Room that will fake out player leading them to losing
-    if room == 12:
+    elif room == 12:
+         
         print()
         print("Room 12")
  
@@ -369,10 +387,13 @@ while game_over is not True:
             
     #-----------------------The extra rooms in the forest-----------------------
     #Northwest of Forest
-    if room == "W1":
+    elif room == "W1":
+         
         print()
         print("W1")
         monster("") #function call
+        if (game_over):
+                break
         choice = input()
         if choice == 'e' or choice == 'E' or choice == 'East':
             room = 7
@@ -381,7 +402,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #West of Forest
-    if room == "W2":
+    elif room == "W2":
+         
         print()
         print("W2")
         
@@ -395,7 +417,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #Southwest of Forest
-    if room == "W3":
+    elif room == "W3":
+         
         print()
         print("W3")
         
@@ -407,7 +430,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #Northeast of Forest
-    if room == "E1":
+    elif room == "E1":
+         
         print()
         print("E1")
         
@@ -419,7 +443,8 @@ while game_over is not True:
         else:
             print("Sorry that isn't a direction you can go.")
     #East of Forest
-    if room == "E2":
+    elif room == "E2":
+         
         print()
         print("E2")
         
@@ -432,3 +457,5 @@ while game_over is not True:
             room = 10
         else:
             print("Sorry that isn't a direction you can go.")
+
+print("Game over")
