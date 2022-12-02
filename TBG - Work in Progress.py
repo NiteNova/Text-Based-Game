@@ -82,7 +82,8 @@ def BattleSystem(monsterType, playerHealth):
     #Zero health = Game over
     if playerHealth == 0:
         print("You died to a", monsterType)
-        game_over == True
+        global game_over
+        game_over = True
         
     elif monsterHealth <= 0:
         print("You killed the", monsterType)
