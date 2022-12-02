@@ -10,7 +10,14 @@ import random #Module for random number generator usage
 game_over = False
 room = 1
 health = 100
-inventory = []
+inventory = {
+    "bat": 0,
+    "healthpot": 0,
+    "double A": 0,
+    "flashlight": 0,
+    "map riddle": 0,
+    }
+
 
 #--------------Battle system Function-----------------------
 def BattleSystem(monsterType):
@@ -70,11 +77,10 @@ def BattleSystem(monsterType):
         
         
         #Damage Change
-        for i in range(len(inventory)):
-            if inventory[i] == "baseball bat":
-                playerAttack = random.randrange(9,20)
-            else:
-                 playerAttack = random.randrange(5, 12)
+        if "baseball ball" in inventory == 1:
+            playerAttack = random.randrange(9,20)
+        else:
+            playerAttack = random.randrange(5, 12)
                  
                  
                  
@@ -93,8 +99,6 @@ def BattleSystem(monsterType):
     elif monsterHealth <= 0:
         print("You killed the", monsterType)
     print("Your current health is", health)
-
-
 #---------------End of Battle system Function---------------
 
 
@@ -140,13 +144,23 @@ def monster(biome):
         else: #10 percent chance
             print("Acid slime creature is oozing from the walls behind you")
             BattleSystem("Slime")
-        
 #----------------End of monster appearance function-----------
+
+
+#-------function to use health potion-------------------------
+def healthpot():
+    global health
+    health += 30
+    print("You used a health pot and recovered 30 hp. Your health is now", health)
+    inventory["healthpot"] =- 1
+    health < 101
+    
+
 
 #local game variables
 room1Mon = False
 room2Mon = False
-room3Mon = False #Not used (used to keep track)
+#room3Mon = False   (Not used) 
 room4Mon = False
 room5Mon = False
 room6Mon = False
@@ -156,12 +170,23 @@ room9Mon = False
 room10Mon = False
 
 #items default settings
+
 bat = False
-healthpot1 = False
+hpot1 = False
+hpot2 = False
+hpot3 = False
+hpot4 = False
+hpot5 = False
+hpot6 = False
 AAbatt = False
+flashlight = False
+riddle_map = False
 
      
-# Game starts   #   Moving around the map   #   User input that affects the game
+# [Game starts]
+   
+#    Moving around the map   
+#    User input that affects the game
 while True:
 
     if (game_over):
@@ -169,26 +194,25 @@ while True:
 
     #Bedroom
     if room == 1:
-        print()
         print("You're in your bedroom ")
-        if bat == False:
-            print("and you see a baseball bat close to the door")
         if room1Mon == False:
             monster("Bedroom") #function call
             if (game_over):
                 break
             room1Mon = True
+        print()
         print("A direction you can go is (e)ast")
-
+        if bat == False:
+            print("and you see a baseball bat close to the door")
         choice = input()
         if choice == 'e' or choice == 'E' or choice == 'east':
             room = 2
         elif (choice == 'baseball bat' or choice == 'pick up baseball bat' or choice == 'bat')  and bat == False:
-            inventory.append("Baseball bat") #Baseball bat
+            inventory["bat"] += 1 #baseball bat for more dmg
             bat = True
             print("You picked up the bat, now you do more damage")
         elif choice == 'inventory':
-            print(inventory)
+            print("You're carrying,", inventory)
         else:
             print("Sorry, that is not an option.")
             
@@ -200,17 +224,21 @@ while True:
             if (game_over):
                 break
             room2Mon = True
-        if healthpot1 == False:
             print("You see a magical health potion on the floor.")
-        print("You are in the hallway, you can go (w)est to go back to your room or (s)outh ")
+            print("You are in the hallway, you can go (w)est to go back to your room or (s)outh ")
         choice = input()
         if choice == 's' or choice == 'S' or choice == 'South':
             room = 3
         elif choice == 'w' or choice == 'W' or choice == 'West':
             room = 1
-        elif choice == ('magical health potion' or choice == 'pick up health magical potion' or choice == 'health potion') and healthpot1 == False:
-            inventory.append("Health Magical Potion") #Health Potion 1
-            healthpot1 = True
+        elif (choice =='magical health potion' or choice == 'pick up health magical potion' or choice == 'health potion' or choice == 'health pot') and hpot1 == False:
+            inventory["healthpot"] += 1 #Health pot for hp
+            hpot1 = True
+            print("You picked up an health potion, type 'use health pot' to recover missing hp. (Warning: You can only use it in levels where you picked it up")
+        elif choice == 'use health pot':
+            healthpot()
+        elif choice == 'inventory':
+            print("You're carrying,", inventory)
         else:
             print("Sorry, that is not an option.")
     
@@ -222,7 +250,7 @@ while True:
         print("You see double A batteries on the floor.")
         choice = input()
         if choice == ('double A batteries' or choice == 'pick up double A batteries') and AAbatt == False:
-            inventory.append("Double A Batteries") #Double A batteries for flashlight
+            inventory["Double A Batteries"] += 1 #Double A batteries for flashlight
             AAbatt = True
         if choice == 's' or choice == 'S' or choice == 'South':
             room = 4
@@ -235,7 +263,7 @@ while True:
     elif room == 4:
          
         print()
-        print("You are at the end of the hallway at the top of the stairway.")
+        print("You are at the end of the hallway at the top of the stairway. The stairway is on your left")
         if room4Mon == False:
             monster("TopStair") #function call
             if (game_over):
@@ -246,6 +274,12 @@ while True:
             room = 3
         elif choice == 'e' or choice == 'e' or choice == 'East':
             room = 5
+        elif (choice =='magical health potion' or choice == 'pick up health magical potion' or choice == 'health potion' or choice == 'health pot') and hpot2 == False:
+            inventory["healthpot"] += 1 #Health pot for hp
+            hpot2 = True
+            print("You picked up an health potion, type 'use health pot' to recover missing hp.")
+        elif choice == 'inventory':
+            print("You're carrying,", inventory)
         else:
             print("Sorry that isn't a direction you can go.")
     
@@ -258,7 +292,7 @@ while True:
         choice = input()
         if choice == 'w' or choice == 'W' or choice == 'West':
             room = 4
-        elif choice == 's' or choice == 's' or choice == 'sOuth':
+        elif choice == 's' or choice == 's' or choice == 'South':
             room = 6
         else:
             print("Sorry that isn't a direction you can go.")
@@ -303,7 +337,7 @@ while True:
             room = "E1"
         else:
             print("Sorry that isn't a direction you can go.")
-
+    #Middle of the Forest
     elif room == 8:
          
         print()
@@ -324,7 +358,7 @@ while True:
     elif room == 9:
          
         print()
-        print("The trail ")
+        print("The trail takes a rigid turn to the left.")
 
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -339,7 +373,7 @@ while True:
     elif room == 10:
          
         print()
-        print("Room 10")
+        print("At this point in the trail, you've stopped in your tracks and see two other paths, one in front of you, the other to your right.")
 
         choice = input()
         if choice == 'w' or choice == 'W' or choice == 'West':
@@ -352,16 +386,16 @@ while True:
             room = 12
         else:
             print("Sorry that isn't a direction you can go.")
-    #The room right before the ending
+    #The room right before the good ending
     elif room == 11:
          
         print()
-        print("Room 11")
+        print("In the distance you see what looks to be red bricks of a building with multiple barbed wires surrounding it. Do you wish to continue going down this path? (Y/N): ")
 
         choice = input()
-        if choice == 'w' or choice == 'W' or choice == 'W':
+        if choice == 'n' or choice == 'N' or choice == 'no' or choice == "No":
             room = 10
-        elif choice == 'e' or choice == 'E' or choice == 'East':
+        elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
             print("Placeholder: Win")
             game_over = True
         else:
@@ -372,10 +406,10 @@ while True:
         print()
         print("Room 12")
  
-        choice = input()
-        if choice == 'n' or choice == 'N' or choice == 'North':
+        choice = input("You hear sounds of people talking with laughter and a bright yellow light from the same direction. Do you wish to continue going down this path? (Y/N): ")
+        if choice == 'n' or choice == 'N' or choice == 'no' or choice == "No":
             room = 10
-        elif choice == '' or choice == '' or choice == '':
+        elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
             print("Placeholder: Lose")
             game_over = True
         else:
