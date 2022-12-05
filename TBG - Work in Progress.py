@@ -351,7 +351,9 @@ while True:
             print("You went straight outside without any light and fell to your death into a nearby ditch full of monsters.")
             break
         print("You're outside and in front of you is a road and across the street there is a path to the forest. You can go (w)est, (n)orth, (e)ast, (s)outh")
-
+        if riddle_map == False:
+            print("You see the map on the ground.")
+        
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 5
@@ -362,6 +364,10 @@ while True:
         elif choice == 'e' or choice == 'E' or choice == 'West':
             print("You died after getting piled on by a huge group of zombies")
             break
+        elif choice == 'map' or choice == "pick up map" and riddle_map == False:
+            print("You picked up a map riddle, but it is blurred with a caption saying it only works once you're in the forest.")
+            inventory["map riddle"] += 1
+            riddle_map = True
         elif choice == 'inventory':
             print("You're carrying,", inventory)
             
@@ -388,6 +394,8 @@ while True:
             room = "W1"
         elif choice == 'w' or choice == 'W' or choice == 'West':
             room = "E1"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         elif (choice =='magical health potion' or choice == 'pick up health magical potion' or choice == 'health potion' or choice == 'health pot') and hpot3 == False:
@@ -418,6 +426,8 @@ while True:
             room = "W2"
         elif choice == 'w' or choice == 'W' or choice == 'West':
             room = "E2"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -435,6 +445,8 @@ while True:
             room = 10
         elif choice == 'w' or choice == 'w' or choice == 'West':
             room = "W3"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -454,6 +466,8 @@ while True:
             room = "E2"
         elif choice == 's'or choice == 'S' or choice == 'South':
             room = 12
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -467,6 +481,8 @@ while True:
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'no' or choice == "No":
             room = 10
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
             print("Upon making your way towards the red building, a voice demands you to stop in your tracks and state your purpose.\nYou shout that you're a survivor and seeking for help. A painted door to look like part of the brick walls is opened and someone whispers to come in.\nThere you found safety and a group of other survivors. TO BE CONTINUED") 
             break
@@ -480,6 +496,8 @@ while True:
         choice = input("You hear sounds of people talking with laughter and a bright yellow light from the same direction. Do you wish to continue going down this path? (Y/N): ")
         if choice == 'n' or choice == 'N' or choice == 'no' or choice == "No":
             room = 10
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
             print("Continuing down this path had made you realize the noises and light were all hullincation due to the low visible psychedelic fog.\nThis fog has also attracted a lot of the monsters leading them cornering you and your death.")
             break
@@ -504,6 +522,8 @@ while True:
             room = 7
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = "W2"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -521,6 +541,8 @@ while True:
             room = 8
         elif choice == 's' or choice == 'S' or choice == 'south':
             room = "W3"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -536,6 +558,8 @@ while True:
             room = "W2"
         elif choice == 'e' or choice == 'E' or choice == 'East':
             room = "9"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -551,6 +575,8 @@ while True:
             room = 7
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = "E2"
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
             
@@ -569,6 +595,8 @@ while True:
             room = 8
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = 10
+        elif choice == 'map' or choice == 'use map' and riddle_map == True:
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
