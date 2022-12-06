@@ -1,8 +1,4 @@
-# WIP Note: call a monster battle function in room 8
-# WIP Note: Add health potion in room 9
-# WIP Note: Last to add is work on the extra rooms in the forest. 
-
-
+import timer
 import random #Module for random number generator usage 
 
 
@@ -12,7 +8,7 @@ import random #Module for random number generator usage
 
 # Default settings when starting the game
 game_over = False
-room = 1
+room = 0
 health = 100
 inventory = {
     "bat": 0,
@@ -23,7 +19,7 @@ inventory = {
     }
 
 
-#--------------Battle system Function-----------------------
+#------------Battle system function-------------------
 def BattleSystem(monsterType):
     global health
 
@@ -93,20 +89,21 @@ def BattleSystem(monsterType):
         print("You attack for", playerAttack)
         print("The monster health is now", monsterHealth)
         
-        
+    
     #Zero health = Game over
     if health <= 0:
         print("You died to a", monsterType)
         global game_over
         game_over = True
         
-    elif monsterHealth <= 0:
+    elif monsterHealth <= 0 and health > 0:
         print("You killed the", monsterType)
     print("Your current health is", health)
-#---------------End of Battle system Function---------------
+    
+#------------End of Battle system Function------------
 
 
-#---------------function for which monster appears----------
+#------------Monster appearing function-------
 def monster(biome):
     num = random.randrange(0,100) # randomize chances when function is called
     if biome == "Bedroom":
@@ -148,23 +145,23 @@ def monster(biome):
         else: #10 percent chance
             print("Acid slime creature is oozing from the walls behind you")
             BattleSystem("Slime")
-    elif biome == "MidForest":
-        if num < 25: # 25% percent chance 
-            print("")
+    elif biome == "Forest":
+        if num < 35: # 35% percent chance 
+            print("A zombie fell out of a tree making you think it's dead, but once your back is turned you hear it's sprinting at you. ")
             BattleSystem("Zombie")
-        elif num < 75: # 50% percent chance
-            print("")
+        elif num < 55: # 20% percent chance
+            print("A witch creeps from behind a tree and after being spotted, charges at you.")
             BattleSystem("Witch")
-        elif num < 90: # 15% percent chance
-            print("")
+        elif num < 75: # 20% percent chance
+            print("A giant spider jumps out of the bush towards your direction.")
             BattleSystem("SSpider")
-        else: #10 percent chance
-            print("")
+        else: #25 percent chance
+            print("Slime oozes from beneath the tree you're standing next to.")
             BattleSystem("Slime")
-#----------------End of monster appearance function-----------
+#------------End of monster appearance function-------
 
 
-#-------function to use health potion-------------------------
+#------------Health potion function-------------------
 def healthpot():
     global health
     if health < 100:
@@ -172,21 +169,16 @@ def healthpot():
     if health > 100:
         health = 100
     print("You used a health pot and recovered 30 hp. Your health is now", health)
-
+#------------End of health potion function------------
 
 
 
 #local game variables
 room1Mon = False
-room2Mon = False
-#room3Mon = False   (Not used) 
+room2Mon = False 
 room4Mon = False
-room5Mon = False
-room6Mon = False
-room7Mon = False
-room8Mon = False
 room9Mon = False
-room10Mon = False
+
 
 #items default settings
 
@@ -208,13 +200,20 @@ riddle_map = False
 #    Moving around the map   
 #    User input that affects the game
 while True:
-
+    if room == 0:
+        print("Placeholder Story Desc")
+        print()
+        k = input("Enter any key to continue\n")
+        if k == "k":
+            room = 1
+        else:
+            room = 1
 
     #Bedroom
     if room == 1:
         print("You're in your bedroom and it's been hours since you've left it.")
         if room1Mon == False:
-            monster("Bedroom") #function call
+            monster("Bedroom") #Enemy function call (calls the battle system function)
             if (game_over):
                 break
             room1Mon = True
@@ -237,14 +236,14 @@ while True:
     #Hallway next to bedroom
     elif room == 2: 
         print()
+        print("You are in the hallway, you can go (w)est to go back to your room or (s)outh ")
         if room2Mon == False:
-            monster("Hallway") #function call
+            monster("Hallway") #Enemy function call (calls the battle system function)
             if (game_over):
                 break
             room2Mon = True
             if hpot1 == False:
                 print("You see a magical health potion on the floor.")
-            print("You are in the hallway, you can go (w)est to go back to your room or (s)outh ")
         choice = input()
         if choice == 's' or choice == 'S' or choice == 'South':
             room = 3
@@ -292,7 +291,7 @@ while True:
         print()
         print("You are at the end of the hallway at the top of the stairway. The stairway is on your left")
         if room4Mon == False:
-            monster("TopStair") #function call
+            monster("TopStair") #Enemy function call (calls the battle system function)
             if (game_over):
                 break
             room4Mon = True
@@ -310,7 +309,7 @@ while True:
     elif room == 5:
          
         print()
-        print("You're at the bottom of the stairway The path to the rest of the house is blocked off by knocked down by a lot of debris and knocked furniture. The door to leave is to your right")
+        print("You're at the bottom of the stairway. The path to the rest of the house is blocked off by a lot of debris and knocked down furniture. The door to leave is to your right")
         if hpot2 == False:
             print("A magical health potion rolls around the corner from the shoe rack and hit your shoes.")
         if flashlight == False:
@@ -344,13 +343,11 @@ while True:
             
     #Outside with house door behind
     elif room == 6:
-        
-        
         print()
+        print("You're outside and in front of you is a road and across the street there is a path to the forest. You can go (w)est, (n)orth, (e)ast, (s)outh")
         if chargflash == False:
             print("You went straight outside without any light and fell to your death into a nearby ditch full of monsters.")
             break
-        print("You're outside and in front of you is a road and across the street there is a path to the forest. You can go (w)est, (n)orth, (e)ast, (s)outh")
         if riddle_map == False:
             print("You see the map on the ground.")
         
@@ -414,8 +411,12 @@ while True:
     elif room == 8:
          
         print()
-        print("You find yourself in the middle of the forest with the least amount of trees, you can go (w)est, (n)orth, (e)ast, (s)outh")
-
+        print("You find yourself in the middle of the forest with less trees than the rest of the forest, you can go (w)est, (n)orth, (e)ast, (s)outh")
+        if room9Mon == False:
+            monster("MidForest") #Enemy function call (calls the battle system function)
+            if (game_over):
+                break
+            Room9Mon = True
         
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -437,7 +438,8 @@ while True:
          
         print()
         print("You see the trail takes a rigid turn to the left at where you are right now.")
-
+        if hpot4 == False:
+            print("A shiny red magical health potion illuminates on the side the trail.")
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 8
@@ -449,6 +451,16 @@ while True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
+        elif (choice =='magical health potion' or choice == 'pick up health magical potion' or choice == 'health potion' or choice == 'health pot') and hpot4 == False:
+            inventory["healthpot"] += 1 #Health pot for hp
+            hpot4 = True
+            print("You picked up an health potion, type 'use health pot' to recover missing hp. (Warning: You can only use it in areas that you picked it up in.")
+        elif choice == 'use health pot' and hpot4 == True and inventory["healthpot"] <= 1:
+            if inventory["healthpot"] >= 1:
+                healthpot()
+                inventory["healthpot"] -= 1
+            else:
+                print("Sorry mate, you aint got no more health potions right now.")
         else:
             print("Sorry that is not an option")
     #Southeast of the Forest    
@@ -492,14 +504,13 @@ while True:
     elif room == 12:
          
         print()
- 
         choice = input("You hear sounds of people talking with laughter and a bright yellow light from the same direction. Do you wish to continue going down this path? (Y/N): ")
         if choice == 'n' or choice == 'N' or choice == 'no' or choice == "No":
             room = 10
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
-            print("Continuing down this path had made you realize the noises and light were all hullincation due to the low visible psychedelic fog.\nThis fog has also attracted a lot of the monsters leading them cornering you and your death.")
+            print("Continuing down this path had made you realize the noises and light were all hallucinations due to the low visible psychedelic fog.\nThis fog has also attracted a lot of the monsters leading them cornering you to your death.")
             break
         else:
             print("Sorry that is not an option")
@@ -513,8 +524,8 @@ while True:
     elif room == "W1":
          
         print()
-        print("W1")
-        monster("") #function call
+        print("You went west and off from the trail of the forest")
+        monster("Forest") #Enemy function call (calls the battle system function)
         if (game_over):
                 break
         choice = input()
@@ -523,7 +534,7 @@ while True:
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = "W2"
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
-            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
+            print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is fake and what is real.")
         elif choice == 'inventory':
             print("You're carrying,", inventory)
         else:
@@ -532,7 +543,7 @@ while True:
     elif room == "W2":
          
         print()
-        print("W2")
+        print("You went west and off from the trail of the forest")
         
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -551,7 +562,7 @@ while True:
     elif room == "W3":
          
         print()
-        print("W3")
+        print("You went west and off from the trail of the forest")
         
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -568,7 +579,7 @@ while True:
     elif room == "E1":
          
         print()
-        print("E1")
+        print("You went east and off from the trail of the forest")
         
         choice = input()
         if choice == 'w' or choice == 'W' or choice == 'West':
@@ -586,8 +597,8 @@ while True:
     elif room == "E2":
          
         print()
-        print("E2")
-        monster("") #function call
+        print("You went east and off from the trail of the forest")
+        monster("Forest") #Enemy function call (calls the battle system function)
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = "E1"
@@ -601,5 +612,5 @@ while True:
             print("You're carrying,", inventory)
         else:
             print("Sorry that is not an option")
-
+print()
 print("Game over")
