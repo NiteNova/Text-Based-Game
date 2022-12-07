@@ -1,4 +1,6 @@
+from winsound import Beep
 import timer
+import os
 import random #Module for random number generator usage 
 
 
@@ -105,6 +107,7 @@ def BattleSystem(monsterType):
 
 #------------Monster appearing function-------
 def monster(biome):
+    Beep(700,400)
     num = random.randrange(0,100) # randomize chances when function is called
     if biome == "Bedroom":
         if num < 20: # 20% percent chance 
@@ -163,6 +166,19 @@ def monster(biome):
 
 #------------Health potion function-------------------
 def healthpot():
+    print("  _____")
+    print(" '.___.'")
+    print("  (___)")
+    print("  <   >")
+    print("   ) (")
+    print("  /`-.\ ")
+    print(" /     \ ")
+    print("/ _    _\ ")
+    print(":,' `-.' :")
+    print("|        |")
+    print(":        ;")
+    print("\       /")
+    print(" `.___.'")
     global health
     if health < 100:
         health += 30
@@ -201,8 +217,9 @@ riddle_map = False
 #    User input that affects the game
 while True:
     if room == 0:
-        print("Placeholder Story Desc")
+        print("December 5, 2014. You’re on your way home from school and the brutal coldness of the early\nwinter is biting you. The sensation of this snaps you back to reality after getting visions about\nthe world ending. You feel your head aching and blood boiling. The walk to your home almost\nseems like the longest hike you’ve ever taken in your entire life. While on the walk, you start to\ncontemplate what the visions meant and if they would actually happen. Interrupted by a sudden\nshout of your name in the distance, “Jackson!!!”. You turn around and see your best friend,\n Amber. Without hesitation, your expression turns into a happy one. Amber has been in your\nentire life since you were a toddler and no matter how many times you see her, you’re always\nhappy when you do. She sprints up the hill you’re on and asks, “Hey dudee, where were you,\nyou left without me.” You respond, “I thought you had a club to go to.” She mentioned that it was\ncanceled. Both of you walk on the same sidewalk talking about the most random stuff. Once you\nmade it to your house, outside Amber nervously says she has something to tell you. But being\nthe oblivious person you are, you interrupt her saying that you have a headache, and ask if she\ncould tell you tomorrow. Your headache worsens by the door of your bedroom and you collapse\non your bed. In your sleep, you just realized what hint she was trying to give, but you turned her\ndown cause your head hurt. You overthink and completely obsessed over the mistake you\nmade. Until, BOOM!!! You jolt from your bed and see a red flare of smoke in the sky from your\nbedroom window. Sirens blare and outside you can see otherworldly monsters... Your visions\ncame true. A minute after this, you heard a loud voice echo from where the flare came from\nsaying, “Any other survivors out there, there is a safe house at the local South Seattle Forest. I\nrepeat anyone who is still alive out, there is a safe house at the local South Seattle Forest.” The\nrealization that the world is ending came quick. However, you were still hung on the potential\nconfession from Amber. Before the entire world collapses, you wanted to talk to Amber one last\ntime, so you grew the determination to stay alive until that happens. ")
         print()
+        print("Note: The game is played on a 2D map and is oriented using a compass (North, East, South, West)")
         k = input("Enter any key to continue\n")
         if k == "k":
             room = 1
@@ -289,7 +306,7 @@ while True:
     elif room == 4:
          
         print()
-        print("You are at the end of the hallway at the top of the stairway. The stairway is on your left")
+        print("You are at the end of the hallway at the top of the stairway. The stairway is on your left (east)")
         if room4Mon == False:
             monster("TopStair") #Enemy function call (calls the battle system function)
             if (game_over):
@@ -344,7 +361,8 @@ while True:
     #Outside with house door behind
     elif room == 6:
         print()
-        print("You're outside and in front of you is a road and across the street there is a path to the forest. You can go (w)est, (n)orth, (e)ast, (s)outh")
+        #One of the ways you can lose and you need the flashlight in order to progress
+        print("You're outside and in front of you is a road and across the street there is a path to the forest. You can go (w)est, (n)orth, (e)ast, (s)outh") 
         if chargflash == False:
             print("You went straight outside without any light and fell to your death into a nearby ditch full of monsters.")
             break
@@ -355,10 +373,10 @@ while True:
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 5
             
-        elif choice == 'w' or choice == 'W' or choice == 'West':
+        elif choice == 'w' or choice == 'W' or choice == 'West': #A way to lose
             print("You died by a car explosion while walking down the road")
             break
-        elif choice == 'e' or choice == 'E' or choice == 'West':
+        elif choice == 'e' or choice == 'E' or choice == 'West': #Another way to lose
             print("You died after getting piled on by a huge group of zombies")
             break
         elif choice == 'map' or choice == "pick up map" and riddle_map == False:
@@ -376,7 +394,7 @@ while True:
 
     #In the forest with the neighborhood behind
     elif room == 7:
-         
+        os.system("color 0a") 
         print()
         print("You're in a very overgrown forest, it gives you an eerie feeling. You can go (w)est, (n)orth, (e)ast, (s)outh")
         if hpot3 == False:
@@ -385,6 +403,7 @@ while True:
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
             room = 6
+            os.system("color 07") 
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = 8
         elif choice == 'e' or choice == 'E' or choice == 'East':
@@ -437,7 +456,7 @@ while True:
     elif room == 9:
          
         print()
-        print("You see the trail takes a rigid turn to the left at where you are right now.")
+        print("You see the trail takes a rigid turn to the left (east) at where you are right now.")
         if hpot4 == False:
             print("A shiny red magical health potion illuminates on the side the trail.")
         choice = input()
