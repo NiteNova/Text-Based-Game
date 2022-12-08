@@ -326,7 +326,7 @@ while True:
     elif room == 5:
          
         print()
-        print("You're at the bottom of the stairway. The path to the rest of the house is blocked off by a lot of debris and knocked down furniture. The door to leave is to your right")
+        print("You're at the bottom of the stairway. The path to the rest of the house is blocked off by a lot of debris and knocked down furniture. The door to leave is to your right (Right = South)")
         if hpot2 == False:
             print("A magical health potion rolls around the corner from the shoe rack and hit your shoes.")
         if flashlight == False:
@@ -406,9 +406,9 @@ while True:
             os.system("color 07") 
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = 8
-        elif choice == 'e' or choice == 'E' or choice == 'East':
-            room = "W1"
         elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = "W1"
+        elif choice == 'e' or choice == 'E' or choice == 'East':
             room = "E1"
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
@@ -442,9 +442,9 @@ while True:
             room = 7
         elif choice == 's' or choice == 'S' or choice == 'South':
             room = 9
-        elif choice == 'e' or choice == 'E' or choice == 'East':
-            room = "W2"
         elif choice == 'w' or choice == 'W' or choice == 'West':
+            room = "W2"
+        elif choice == 'e' or choice == 'E' or choice == 'East':
             room = "E2"
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
@@ -486,7 +486,7 @@ while True:
     elif room == 10:
          
         print()
-        print("At this point in the trail, you've stopped in your tracks and see two other paths, one in front of you, the other to your right.")
+        print("At this point in the trail, you've stopped in your tracks and see two other paths, one in front of you, the other to your right. (Front = East & Right = South)")
 
         choice = input()
         if choice == 'w' or choice == 'W' or choice == 'West':
@@ -515,6 +515,7 @@ while True:
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
+            os.system("color 01")
             print("Upon making your way towards the red building, a voice demands you to stop in your tracks and state your purpose.\nYou shout that you're a survivor and seeking for help. A painted door to look like part of the brick walls is opened and someone whispers to come in.\nThere you found safety and a group of other survivors. TO BE CONTINUED") 
             break
         else:
@@ -529,6 +530,7 @@ while True:
         elif choice == 'map' or choice == 'use map' and riddle_map == True:
             print("Life has two choices, one is an illusion, the other is the brutal reality. Determine what is an illusion and what is real.")
         elif choice == 'y' or choice == 'Y' or choice == 'yes' or choice == "Yes":
+            os.system("color 04")
             print("Continuing down this path had made you realize the noises and light were all hallucinations due to the low visible psychedelic fog.\nThis fog has also attracted a lot of the monsters leading them cornering you to your death.")
             break
         else:
@@ -539,7 +541,7 @@ while True:
             
             
     #-----------------------The extra rooms in the forest-----------------------
-    #Northwest of Forest
+    #Northwest of Forest 
     elif room == "W1":
          
         print()
