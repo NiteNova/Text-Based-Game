@@ -543,7 +543,7 @@ while True:
     elif room == "W1":
          
         print()
-        print("You went west and off from the trail of the forest")
+        print("You went north west and off from the trail of the forest")
         monster("Forest") #Enemy function call (calls the battle system function)
         if (game_over):
                 break
@@ -562,7 +562,7 @@ while True:
     elif room == "W2":
          
         print()
-        print("You went west and off from the trail of the forest")
+        print("You went middle west and off from the trail of the forest")
         
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -581,7 +581,7 @@ while True:
     elif room == "W3":
          
         print()
-        print("You went west and off from the trail of the forest")
+        print("You went south west and off from the trail of the forest")
         
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
@@ -598,7 +598,7 @@ while True:
     elif room == "E1":
          
         print()
-        print("You went east and off from the trail of the forest")
+        print("You went middle east and off from the trail of the forest")
         
         choice = input()
         if choice == 'w' or choice == 'W' or choice == 'West':
@@ -616,7 +616,7 @@ while True:
     elif room == "E2":
          
         print()
-        print("You went east and off from the trail of the forest")
+        print("You went north east and off from the trail of the forest")
         monster("Forest") #Enemy function call (calls the battle system function)
         choice = input()
         if choice == 'n' or choice == 'N' or choice == 'North':
